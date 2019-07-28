@@ -1,0 +1,56 @@
+#!/usr/bin/env ruby
+
+Dir.chdir __dir__ do
+    require 'bundler/setup'
+end
+
+require 'require_all'
+require 'colorize'
+
+require_rel 'lib'
+
+require 'securerandom'
+require 'shellwords'
+require 'tempfile'
+require 'open3'
+
+class Enparallel
+    def initialize
+        @tasks = TaskList.new(targets, command)
+    end
+
+    def run
+        @tasks.start
+
+        render_progress do
+            @tasks.execute
+        end
+
+        @tasks.finish
+    end
+
+    private
+
+    def command
+        Command.from_argv
+    end
+
+    def targets
+        STDIN.each_line.map(&:chomp)
+    end
+
+    def render_progress
+        thread = Thread.new { loop { render } }
+        yield
+        thread.terminate
+        render
+        puts
+    end
+
+    def render
+        print "\r" + @tasks.render
+        sleep 0.1
+    end
+end
+
+Enparallel.new.run

@@ -34,8 +34,8 @@ class CLI
                 The placeholder "{}", if present, is replaced with each line in turn.
 
             #{'Options:'.bold}
-                -w, --workers N     Batch into a pool of N workers [default: #{workers_default}].
-                -p, --pick TYPE     Task-picking rule (see "Types") [default: #{pick_default}].
+                -w, --workers <n>   Batch into a pool of <n> workers [default: #{workers_default}].
+                -p, --pick <type>   Task-picking rule (see "Types") [default: #{pick_default}].
                 -v, --version       Version.
                 -h, --help          Help.
 

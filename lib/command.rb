@@ -4,6 +4,11 @@ class Command
         @args = args
     end
 
+    def self.from_str(str)
+        name, *args = str
+        Command.new(name, args)
+    end
+
     def get_line(replacement)
         [@name, *replace(replacement)].shelljoin
     end
@@ -12,10 +17,5 @@ class Command
 
     def replace(replacement)
         @args.map { |arg| arg.gsub('{}', replacement) }
-    end
-
-    def self.from_argv
-        name, *args = ARGV
-        Command.new(name, args)
     end
 end

@@ -2,10 +2,10 @@
 
 Dir.chdir __dir__ do
     require 'bundler/setup'
+    require 'require_all'
+    require 'colorize'
+    require 'docopt'
 end
-
-require 'require_all'
-require 'colorize'
 
 require_rel 'lib'
 
@@ -13,31 +13,29 @@ require 'securerandom'
 require 'shellwords'
 require 'tempfile'
 require 'open3'
+require 'etc'
 
 class Enparallel
-    def initialize
-        @tasks = TaskList.new(targets, command)
+    def self.run(cli)
+        tasks = TaskList.new(cli.targets, cli.command, cli.pick)
+        new(tasks).run
+    end
+
+    def initialize(tasks)
+        @tasks = tasks
     end
 
     def run
-        @tasks.start
+        # @tasks.start
 
-        render_progress do
-            @tasks.execute
-        end
+        # render_progress do
+        #     @tasks.execute
+        # end
 
-        @tasks.finish
+        # @tasks.finish
     end
 
     private
-
-    def command
-        Command.from_argv
-    end
-
-    def targets
-        STDIN.each_line.map(&:chomp)
-    end
 
     def render_progress
         thread = Thread.new { loop { render } }
@@ -53,4 +51,4 @@ class Enparallel
     end
 end
 
-Enparallel.new.run
+Enparallel.run(CLI.parse(ARGV))

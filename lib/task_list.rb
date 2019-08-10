@@ -1,42 +1,17 @@
 class TaskList
     include Enumerable
 
-    def initialize(targets, command)
+    def initialize(targets, command, pick)
         @tasks = targets.map { |target| Task.new(command, target) }
-        @run_id = 1
+        @pick = pick
     end
 
-    def each(&block)
-        @tasks.each(&block)
+    def each
+        @tasks.each
     end
 
     def length
         @tasks.length
-    end
-
-    def start
-        puts 'Running %d tasks' % @tasks.length
-        puts
-    end
-
-    def execute(a = nil)
-        # pp a
-        # 1. Take a parameter `batch_into` representing how many to batch up by.
-        # 2. Divide tasks by `batch_into`, do some maths, then run & join each
-        # `batch_into` set of tasks.
-        # 3. The render loop will take care of updating the UI.
-        each(&:run)
-        each(&:join)
-    end
-
-    def finish
-        puts
-        puts "Tasks complete"
-        puts
-        puts "#{successful_tasks.length.to_s.green.bold} tasks successful"
-        puts "#{failed_tasks.length.to_s.red.bold} tasks failed"
-        puts
-        save
     end
 
     def render
@@ -51,10 +26,6 @@ class TaskList
             paths = labels.map { |label| '/tmp/enparallel-run-%d-%s.txt' % [run_id, label] }
             return *paths if paths.all? { |path| !File.exist?(path) }
         end
-    end
-
-    def next_run_id
-        @run_id += 1
     end
 
     def write_log(logfile, label, tasks)

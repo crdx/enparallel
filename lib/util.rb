@@ -1,9 +1,13 @@
 class Util
+    def self.processor_count
+        Etc.nprocessors
+    end
+
     def self.bytes_to_human(size)
         if size > 1024
-            (size / 1024).to_s + 'K'
+            '%sK' % size / 1024
         else
-            size.to_s + 'B'
+            '%sB' % size
         end
     end
 end

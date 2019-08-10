@@ -9,24 +9,23 @@ class Task
     end
 
     def char
-        case @thread.status
-            when 'run'      then 'R'
-            when 'aborting' then 'A'.red
-            # when 'sleep'    then 'S'.light_black.on_white
-            when nil        then 'E' # exception
-            when false      then char_for_exit_status
-            else                 'R'
-        end.bold
+        return '?'
+        # case @thread.status
+        #     when 'run'      then 'R'
+        #     when 'aborting' then 'A'.red
+        #     # when 'sleep'    then 'S'.light_black.on_white
+        #     when nil        then 'E' # exception
+        #     when false      then char_for_exit_status
+        #     else                 'R'
+        # end.bold
     end
 
     def run
         @run_date = Time.now
-        @thread = Thread.new do
-            Open3.popen3(line) do |stdin, stdout, stderr, thread|
-                @value = thread.value
-                @stdout = stdout.read.chomp
-                @stderr = stderr.read.chomp
-            end
+        Open3.popen3(line) do |stdin, stdout, stderr, thread|
+            @value = thread.value
+            @stdout = stdout.read.chomp
+            @stderr = stderr.read.chomp
         end
     end
 

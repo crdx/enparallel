@@ -5,7 +5,7 @@ def failed
 end
 
 def get_delay
-    rand(10) + 1
+    rand(5)
 end
 
 delay = get_delay

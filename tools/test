@@ -1,2 +1,2 @@
 #!/bin/bash
-bundle exec rspec --require spec_helper "$@"
+bundle exec rspec --require spec_helper

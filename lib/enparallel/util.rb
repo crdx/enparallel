@@ -4,8 +4,8 @@ class Util
     end
 
     def self.bytes_to_human(size)
-        if size > 1024
-            '%sK' % size / 1024
+        if size >= 1024
+            '%sK' % (size / 1024)
         else
             '%sB' % size
         end

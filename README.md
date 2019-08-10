@@ -14,11 +14,11 @@ Usage:
 
 Options:
     -w, --workers N     Batch into a pool of N workers [default: #].
-    -p, --pick TYPE     Task-picking rule (see "Types") [default: sequential].
+    -p, --pick RULE     Task-picking rule (see "Rules") [default: sequential].
     -v, --version       Version.
     -h, --help          Help.
 
-Types:
+Rules:
     sequential          The order in which the tasks were queued.
     random              Any order.
     outside-in          Start from the edges and work one's way in.

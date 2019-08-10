@@ -1,6 +1,7 @@
 class CLI
-    def initialize(opts)
+    def initialize(opts, stdin)
         @opts = opts
+        @stdin = stdin
     end
 
     def self.workers_default
@@ -11,21 +12,22 @@ class CLI
         'sequential'
     end
 
-    def self.parse(argv)
-        new(Docopt::docopt(usage, argv: argv))
-    rescue Docopt::Exit => e
-        puts e.message
-        exit 1
+    def self.parse(argv, stdin)
+        new(Docopt::docopt(usage, argv: argv, version: version), stdin)
     end
 
     def self.basename
         File.basename($0)
     end
 
+    def self.version
+        '1.0.0'
+    end
+
     def self.usage
         <<~EOF
             #{'Usage:'.bold}
-                #{basename} [options] <command>
+                #{basename} [options] <command>...
 
             #{'Description:'.bold}
                 #{basename} operates by reading lines from standard input, and executing
@@ -42,17 +44,18 @@ class CLI
             #{'Types:'.bold}
                 sequential          The order in which the tasks were queued.
                 random              Any order.
-                outside-in          Start from the edges and work one's way in.
-                inside-out          Start from the middle and work one's way out.
         EOF
+
+        # outside-in          Start from the edges and work one's way in.
+        # inside-out          Start from the middle and work one's way out.
     end
 
-    def targets
-        @stdin ||= STDIN.each_line.map(&:chomp)
+    def inputs
+        @inputs ||= @stdin.each_line.map(&:chomp)
     end
 
     def command
-        Command.from_str(@opts['<command>'])
+        Command.from_a(@opts['<command>'])
     end
 
     def workers

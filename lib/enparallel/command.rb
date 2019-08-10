@@ -4,12 +4,12 @@ class Command
         @args = args
     end
 
-    def self.from_str(str)
-        name, *args = str
+    def self.from_a(a)
+        name, *args = a
         Command.new(name, args)
     end
 
-    def get_line(replacement)
+    def interpolate(replacement)
         [@name, *replace(replacement)].shelljoin
     end
 

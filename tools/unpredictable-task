@@ -1,0 +1,22 @@
+#!/usr/bin/env ruby
+
+def failed
+    rand(2) == 0
+end
+
+def get_delay
+    rand(10) + 1
+end
+
+delay = get_delay
+
+puts 'Sleep %d secs' % delay
+sleep delay
+
+if failed
+    STDERR.puts 'Fail'
+    exit 1
+else
+    puts 'Success'
+    exit 0
+end

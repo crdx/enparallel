@@ -1,0 +1,2 @@
+#!/bin/bash
+seq 50 | ./enparallel tools/unpredictable-task

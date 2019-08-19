@@ -36,8 +36,12 @@ class ThreadPool
         @tasks.reject(&:successful?)
     end
 
-    def get_logger
-        Logger.from_thread_pool(self)
+    def get_logs
+        logger.get_logs
+    end
+
+    def logger
+        @logger ||= Logger.from_thread_pool(self)
     end
 
     private

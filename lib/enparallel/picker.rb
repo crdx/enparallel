@@ -2,7 +2,7 @@ module Enparallel
     class Picker
         def initialize(items, rule)
             if rule == :random
-                items.shuffle!
+                items = items.shuffle
             end
 
             @items = items

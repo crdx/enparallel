@@ -45,6 +45,12 @@ With `--pick random`, tasks are picked from the list in a random order.
 
 ![](examples/random.gif)
 
+## Tests
+
+Run tests with `tools/test`.
+
+Code coverage is output to `coverage/`, and stands at 100% for library code.
+
 ## Development
 
 Use `tools/install` to build and install locally for testing.

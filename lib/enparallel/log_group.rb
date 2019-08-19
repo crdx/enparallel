@@ -7,8 +7,8 @@ module Enparallel
             @tasks = tasks
         end
 
-        def content
-            tasks.join("\n%s\n" % '=' * 30) + "\n"
+        def to_soml
+            tasks.join("\n\n") + "\n"
         end
 
         def has_tasks?
@@ -16,8 +16,7 @@ module Enparallel
         end
 
         def write(path)
-            lf = "\n"
-            size = File.write(path, @tasks.join(lf + '=' * 30 + lf) + lf)
+            size = File.write(path, to_soml)
             [path, Util.bytes_to_human(size)]
         end
 

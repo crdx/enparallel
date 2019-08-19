@@ -10,7 +10,12 @@ describe Logger do
 
         expect(log_groups.length).to eq(1)
         expect(log_groups.first.type).to eq(:success)
-        expect(log_groups.first.content).to include('echo cheese')
+
+        expect(log_groups.first.to_soml).to include('CommandLine echo cheese')
+        expect(log_groups.first.to_soml).to include('StandardOutput cheese')
+        expect(log_groups.first.to_soml).to include('ExitStatus 0')
+
+        expect(log_groups.first.to_soml).not_to include('StandardError')
     end
 
     it 'logs failed tasks' do
@@ -18,7 +23,12 @@ describe Logger do
 
         expect(log_groups.length).to eq(1)
         expect(log_groups.first.type).to eq(:failure)
-        expect(log_groups.first.content).to include('ekko cheese')
+
+        expect(log_groups.first.to_soml).to include('CommandLine ekko cheese')
+        expect(log_groups.first.to_soml).to include('ExitStatus 1')
+        expect(log_groups.first.to_soml).to include('StandardError No such file or directory - ekko')
+
+        expect(log_groups.first.to_soml).not_to include('StandardOutput')
     end
 
     let (:task) { 'cheese' }

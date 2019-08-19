@@ -14,28 +14,15 @@ module Enparallel
         end
 
         def to_s
-            status = []
+            document = SOML::Document.new
 
-            status << '[command_line]'
-            status << command_line
+            document.add('CommandLine', command_line)
+            document.add('ExitStatus', @exit_status)
+            document.add('RanAt', @ran_at)
+            document.add('StandardOutput', @stdout) unless @stdout.empty?
+            document.add('StandardError', @stderr) unless @stderr.empty?
 
-            status << '[exit_status]'
-            status << @exit_status
-
-            status << '[ran_at]'
-            status << @ran_at
-
-            if not @stdout.empty?
-                status << '[stdout]'
-                status << @stdout
-            end
-
-            if not @stderr.empty?
-                status << '[stderr]'
-                status << @stderr
-            end
-
-            status.join("\n")
+            document.to_s
         end
 
         def char

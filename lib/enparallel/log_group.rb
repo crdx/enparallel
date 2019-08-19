@@ -1,4 +1,4 @@
-class Log
+class LogGroup
     attr_reader :type, :tasks
 
     def initialize(type, tasks)
@@ -12,13 +12,13 @@ class Log
 
     def self.success(pool)
         if pool.successful_tasks.length > 0
-            Log.new(:success, pool.successful_tasks)
+            LogGroup.new(:success, pool.successful_tasks)
         end
     end
 
     def self.failure(pool)
         if pool.failed_tasks.length > 0
-            Log.new(:failure, pool.failed_tasks)
+            LogGroup.new(:failure, pool.failed_tasks)
         end
     end
 end

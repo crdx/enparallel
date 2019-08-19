@@ -8,6 +8,6 @@ class Logger
     end
 
     def get_logs
-        [Log.success(@pool), Log.failure(@pool)].compact
+        [LogGroup.success(@pool), LogGroup.failure(@pool)].compact
     end
 end

@@ -20,4 +20,14 @@ describe Logger do
         expect(log_groups.first.type).to eq(:failure)
         expect(log_groups.first.content).to include('ekko cheese')
     end
+
+    let (:task) { 'cheese' }
+    let (:path) { '/fake/path' }
+
+    it 'writes tasks to disk' do
+        expect(File).to receive(:write).with(path, task + "\n").and_return(100)
+
+        log_group = LogGroup.new(:success, [task])
+        expect(log_group.write(path)).to eq([path, '100B'])
+    end
 end

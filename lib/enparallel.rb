@@ -23,6 +23,7 @@ module Enparallel
 
         def initialize(pool)
             @pool = pool
+            @id = 0
         end
 
         def run
@@ -39,7 +40,7 @@ module Enparallel
         private
 
         def start
-            puts 'Running %d tasks' % @pool.size
+            puts 'Running %d tasks with %d workers' % [@pool.size, @pool.worker_count]
             puts
         end
 
@@ -47,7 +48,7 @@ module Enparallel
             puts
             puts "Tasks complete"
             puts
-            puts "#{@pool.successful_tasks.length.to_s.green.bold} tasks successful"
+            puts "#{@pool.succeeded_tasks.length.to_s.green.bold} tasks succeeded"
             puts "#{@pool.failed_tasks.length.to_s.red.bold} tasks failed"
             puts
         end
@@ -65,12 +66,36 @@ module Enparallel
             sleep 0.1
         end
 
-        def get_paths
+        def all_paths_available(paths)
+            paths.all? { |path| !File.exist?(path) }
+        end
+
+        def next_id
+            @id += 1
+        end
+
+        def generate_paths(types)
+            loop do
+                id = next_id
+
+                paths = types.to_h do |type|
+                    [type, '/tmp/enparallel-run-%d-%s.txt' % [id, type]]
+                end
+
+                break paths if all_paths_available(paths.values)
+            end
         end
 
         def save_log
-            logs = @pool.get_logs
-            pp logs
+            log_groups = @pool.get_log_groups
+            types = log_groups.map(&:type).uniq
+            paths = generate_paths(types)
+
+            log_groups.each do |log_group|
+                type = log_group.type
+                path = paths[type]
+                puts 'Written %s log: %s (%s)' % [type, *log_group.write(path)]
+            end
         end
     end
 end

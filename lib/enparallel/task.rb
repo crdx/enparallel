@@ -43,7 +43,7 @@ module Enparallel
                 'R'
             elsif @exit_status.nil?
                 'S'
-            elsif successful?
+            elsif has_succeeded?
                 'D'.green
             else
                 'F'.red
@@ -66,7 +66,7 @@ module Enparallel
             @running = false
         end
 
-        def successful?
+        def has_succeeded?
             raise 'Task not resolved' if @ran_at.nil?
             @exit_status == 0
         end

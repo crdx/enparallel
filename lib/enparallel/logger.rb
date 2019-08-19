@@ -8,8 +8,12 @@ module Enparallel
             @pool = pool
         end
 
-        def get_logs
-            [LogGroup.success(@pool), LogGroup.failure(@pool)].compact
+        def get_all_log_groups
+            [LogGroup.success(@pool), LogGroup.failure(@pool)]
+        end
+
+        def get_log_groups
+            get_all_log_groups.select(&:has_tasks?)
         end
     end
 end

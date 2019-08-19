@@ -1,23 +1,23 @@
 describe Logger do
-    def get_logs(type)
+    def get_log_groups(type)
         pool = get_pool_of(5, type)
         pool.drain_wait
-        pool.get_logs
+        pool.get_log_groups
     end
 
-    it 'logs successful tasks' do
-        logs = get_logs(:good_command)
+    it 'logs succeeded tasks' do
+        log_groups = get_log_groups(:good_command)
 
-        expect(logs.length).to eq(1)
-        expect(logs.first.type).to eq(:success)
-        expect(logs.first.content).to include('echo potato')
+        expect(log_groups.length).to eq(1)
+        expect(log_groups.first.type).to eq(:success)
+        expect(log_groups.first.content).to include('echo cheese')
     end
 
     it 'logs failed tasks' do
-        logs = get_logs(:bad_command)
+        log_groups = get_log_groups(:bad_command)
 
-        expect(logs.length).to eq(1)
-        expect(logs.first.type).to eq(:failure)
-        expect(logs.first.content).to include('ekko potato')
+        expect(log_groups.length).to eq(1)
+        expect(log_groups.first.type).to eq(:failure)
+        expect(log_groups.first.content).to include('ekko cheese')
     end
 end

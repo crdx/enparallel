@@ -1,9 +1,11 @@
 module Enparallel
     class ThreadPool
-        def initialize(tasks, worker_count, pick_rule)
+        attr_accessor :worker_count
+
+        def initialize(tasks, requested_worker_count, rule)
             @tasks = tasks
-            @worker_count = if tasks.length < worker_count then tasks.length else worker_count end
-            @picker = Picker.new(tasks, pick_rule.to_sym)
+            @worker_count = [tasks.length, requested_worker_count].min
+            @picker = Picker.new(tasks, rule.to_sym)
         end
 
         def drain_wait
@@ -14,7 +16,7 @@ module Enparallel
         def drain
             @workers = @worker_count.times.map do
                 Thread.new do
-                    while task = @picker.pop
+                    while task = @picker.next
                         task.run
                     end
                 end
@@ -29,16 +31,24 @@ module Enparallel
             @tasks.map(&:char).join.bold
         end
 
-        def successful_tasks
-            @tasks.select(&:successful?)
+        def succeeded_tasks
+            @tasks.select(&:has_succeeded?)
         end
 
         def failed_tasks
-            @tasks.reject(&:successful?)
+            @tasks.reject(&:has_succeeded?)
         end
 
-        def get_logs
-            logger.get_logs
+        def tasks_of(type)
+            if type == :success
+                succeeded_tasks
+            elsif type == :failure
+                failed_tasks
+            end
+        end
+
+        def get_log_groups
+            logger.get_log_groups
         end
 
         def logger

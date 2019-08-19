@@ -19,10 +19,10 @@ def sleep_command(time)
 end
 
 def get_task(type, *args)
-    Task.new(send(type, *args), 'potato')
+    Task.new(send(type, *args), 'cheese')
 end
 
-def get_pool_of(n, type=:good_command, *args)
+def get_pool_of(n, type = :good_command, *args)
     tasks = n.times.map { get_task(type, *args) }
     ThreadPool.new(tasks, 4, :sequential)
 end

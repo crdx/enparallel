@@ -6,17 +6,15 @@ module Enparallel
             end
 
             @items = items
-            @i = 0
+            @i = -1
         end
 
-        def pop
+        def next
             @items[next_index]
         end
 
         def next_index
-            c = @i
             @i += 1
-            c
         end
     end
 end

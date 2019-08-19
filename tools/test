@@ -1,3 +1,5 @@
 #!/bin/bash
 bundle exec rspec --require spec_helper
+
+echo
 echo xdg-open coverage/index.html

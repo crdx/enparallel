@@ -3,13 +3,23 @@ describe ThreadPool do
         expect(get_pool_of(8).size).to eq(8)
     end
 
+    it 'does not pick more workers than there are tasks' do
+        10.times do |i|
+            expect(get_pool_of(i).worker_count).to eq(i) if Util.processor_count > i
+        end
+    end
+
+    it 'does not pick more workers than there are CPUs' do
+        expect(get_pool_of(8).worker_count).to eq(Util.processor_count)
+    end
+
     [0, 1, 2, 3, 5, 8].each do |n|
         it 'renders complete tasks with a D' do
             pool = get_pool_of(n, :good_command)
             pool.drain_wait
 
             expect(pool.render.uncolorize).to eq('D' * n)
-            expect(pool.successful_tasks.length).to eq(n)
+            expect(pool.succeeded_tasks.length).to eq(n)
             expect(pool.failed_tasks.length).to eq(0)
         end
 
@@ -19,7 +29,7 @@ describe ThreadPool do
 
             expect(pool.render.uncolorize).to eq('F' * n)
             expect(pool.failed_tasks.length).to eq(n)
-            expect(pool.successful_tasks.length).to eq(0)
+            expect(pool.succeeded_tasks.length).to eq(0)
         end
 
         it 'renders unstarted tasks with an S' do
@@ -36,18 +46,4 @@ describe ThreadPool do
         sleep sleep_time / 2
         expect(pool.render.uncolorize).to eq('R' * 2)
     end
-
-    # it 'saves the logfiles with output to disk' do
-    #     pool = get_pool_of(2, :good_command)
-    #     pool.drain_wait
-
-    #     success, failure = StringIO.new, StringIO.new
-
-    #     allow(success).to receive(:path) {/
-    #     allow(failure).to receive(:path)
-
-    #     expect(pool).to receive(:get_log_files) { [success, failure] }
-
-    #     pp pool.save_output
-    # end
 end

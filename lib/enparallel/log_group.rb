@@ -11,16 +11,26 @@ module Enparallel
             tasks.join("\n%s\n" % '=' * 30) + "\n"
         end
 
+        def has_tasks?
+            tasks.length > 0
+        end
+
+        def write(path)
+            lf = "\n"
+            size = File.write(path, @tasks.join(lf + '=' * 30 + lf) + lf)
+            [path, Util.bytes_to_human(size)]
+        end
+
+        def self.of(type, pool)
+            LogGroup.new(type, pool.tasks_of(type))
+        end
+
         def self.success(pool)
-            if pool.successful_tasks.length > 0
-                LogGroup.new(:success, pool.successful_tasks)
-            end
+            of(:success, pool)
         end
 
         def self.failure(pool)
-            if pool.failed_tasks.length > 0
-                LogGroup.new(:failure, pool.failed_tasks)
-            end
+            of(:failure, pool)
         end
     end
 end

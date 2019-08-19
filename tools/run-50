@@ -1,2 +1,2 @@
 #!/bin/bash
-seq 50 | ./bin/enparallel tools/unpredictable-task "$@"
+seq 50 | ./tools/run tools/unpredictable-task "$@"

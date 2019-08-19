@@ -1,9 +1,10 @@
 #!/usr/bin/env ruby
 
 require_relative '../lib/enparallel'
+include Enparallel
 
 begin
-    Enparallel.run(CLI.parse(ARGV, STDIN))
+    Main.run(CLI.parse(ARGV, STDIN))
 rescue Docopt::Exit => e
     puts e.message
     exit

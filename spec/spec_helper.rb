@@ -28,3 +28,4 @@ def get_pool_of(n, type=:good_command, *args)
 end
 
 require_relative '../lib/enparallel'
+include Enparallel

@@ -46,9 +46,6 @@ module Enparallel
                     sequential          The order in which the tasks were queued.
                     random              Any order.
             EOF
-
-            # outside-in          Start from the edges and work one's way in.
-            # inside-out          Start from the middle and work one's way out.
         end
 
         def inputs

@@ -1,0 +1,6 @@
+#!/bin/bash
+
+OPTS="-S 1 -w 72 -h 20"
+
+asciicast2gif $OPTS examples/sequential.cast examples/sequential.gif
+asciicast2gif $OPTS examples/random.cast examples/random.gif

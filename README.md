@@ -20,16 +20,36 @@ Options:
 
 Rules:
     sequential          The order in which the tasks were queued.
-    random              Any order.
-    outside-in          Start from the edges and work one's way in.
-    inside-out          Start from the middle and work one's way out.
+    random              Random order.
 ```
 
 The default value for `--workers` is what Ruby determines to be the number of CPUs on the current system. The value displayed in the help text is the value that will be used.
 
+## Installation
+
+The gem is called `enpara` because rubygems.org decided that `enparallel` is too close to `parallel`, a _typo-protected_ gem.
+
+```
+gem install enpara
+```
+
+The binary is still called `enparallel`.
+
 ## Examples
 
-TODO
+With `--pick sequential`, tasks are picked from the list in order.
+
+![](examples/sequential.gif)
+
+With `--pick random`, tasks are picked from the list in a random order.
+
+![](examples/random.gif)
+
+## Development
+
+Use `tools/install` to build and install locally for testing.
+
+Use `tools/publish` to release to rubygems.org
 
 ## Bugs or contributions
 

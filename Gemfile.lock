@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    enparallel (1.0.0)
+    enpara (1.0.0)
       colorize (~> 0.8.1)
       docopt (~> 0.6.1)
       require_all (~> 2.0)
@@ -39,7 +39,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  enparallel!
+  enpara!
   rake (~> 12.3)
   rspec (~> 3.8)
   simplecov (~> 0.17.0)

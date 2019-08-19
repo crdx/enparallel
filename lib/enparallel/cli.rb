@@ -14,15 +14,11 @@ module Enparallel
         end
 
         def self.parse(argv, stdin)
-            new(Docopt::docopt(usage, argv: argv, version: version), stdin)
+            new(Docopt::docopt(usage, argv: argv, version: VERSION), stdin)
         end
 
         def self.basename
             File.basename($0)
-        end
-
-        def self.version
-            '1.0.0'
         end
 
         def self.usage

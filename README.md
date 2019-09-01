@@ -4,7 +4,7 @@ Run many commands enparallel with a colourful overview.
 
 ## Installation
 
-The gem is called `enpara` because rubygems.org decided that `enparallel` is too close to `parallel`, a _typo-protected_ gem.
+The gem is called `enpara` because [rubygems.org](https://rubygems.org/gems/enpara) decided that `enparallel` is too close to `parallel`, a _typo-protected_ gem.
 
 ```
 gem install enpara

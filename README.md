@@ -2,24 +2,46 @@
 
 Run many commands enparallel with a colourful overview.
 
+## Installation
+
+The gem is called `enpara` because rubygems.org decided that `enparallel` is too close to `parallel`, a _typo-protected_ gem.
+
+```
+gem install enpara
+```
+
+The binary is called `enparallel`.
+
 ## Usage
 
- **enparallel** operates by reading lines from standard input, and executing a command once per entry, in parallel.
+ Standard operation is to read lines from standard input, and execute a command once per entry, in parallel.
 
-The placeholder `{}`, if present, is replaced with each line of input in turn.
+The placeholder `{}`, if present, is replaced with each entry in turn.
 
 ```
 seq 1 10 | enparallel sleep {}
 ```
 
 To run a more complex command or to make use of shell functions or constructs
-(enparallel runs its argument as a program) use a call to `bash -c`. Note that
+(the argument is run as a program) use a call to `bash -c`. Note that
 because of the `-c` you need to prefix the command with `--` to indicate the
 end of parameters to enparallel.
 
 ```
 seq 1 10 | enparallel -- bash -c "sleep {} && echo Slept for {}"
 ```
+
+## Examples
+
+With `--pick sequential`, tasks are picked from the list in order.
+
+![](examples/sequential.gif)
+
+With `--pick random`, tasks are picked from the list in a random order.
+
+![](examples/random.gif)
+
+## Command line interface
 
 ```
 Usage:
@@ -42,25 +64,17 @@ Types:
 
 The default value for `--workers` is what Ruby determines to be the number of CPUs on the current system. The value displayed in the help text is the value that will be used.
 
-## Installation
+## Tests
 
-The gem is called `enpara` because rubygems.org decided that `enparallel` is too close to `parallel`, a _typo-protected_ gem.
+Run tests with `tools/test`.
 
-```
-gem install enpara
-```
+Code coverage is output to `coverage/`, and stands at 100% for library code.
 
-The binary is still called `enparallel`.
+## Development
 
-## Examples
+Use `tools/install` to build and install locally for testing.
 
-With `--pick sequential`, tasks are picked from the list in order.
-
-![](examples/sequential.gif)
-
-With `--pick random`, tasks are picked from the list in a random order.
-
-![](examples/random.gif)
+Use `tools/publish` to release to rubygems.org
 
 ## Log output
 
@@ -75,18 +89,6 @@ A document is represented by a set of fields. Fields are separated with no more 
 ### `SOML::Field`
 
 A field is represented by name and a value. A value can be a single line value or a value that spans multiple lines.
-
-## Tests
-
-Run tests with `tools/test`.
-
-Code coverage is output to `coverage/`, and stands at 100% for library code.
-
-## Development
-
-Use `tools/install` to build and install locally for testing.
-
-Use `tools/publish` to release to rubygems.org
 
 ## Bugs or contributions
 

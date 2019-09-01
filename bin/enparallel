@@ -5,7 +5,7 @@ include Enparallel
 
 class Main
     def self.run(cli)
-        tasks = cli.inputs.map { |input| Task.new(cli.command, input) }
+        tasks = cli.inputs.map { |input| Task.new(cli.command, input, cli.ascii) }
         pool = ThreadPool.new(tasks, cli.workers, cli.pick)
         new(pool).run
     end

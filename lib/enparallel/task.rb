@@ -3,7 +3,7 @@ module Enparallel
         attr_accessor :stdout
         attr_accessor :stderr
 
-        def initialize(command, input)
+        def initialize(command, input, ascii)
             @command = command
             @input = input
             @running = false
@@ -11,6 +11,7 @@ module Enparallel
             @stderr = ''
             @ran_at = nil
             @exit_status = nil
+            @ascii = ascii
         end
 
         def to_s
@@ -27,13 +28,13 @@ module Enparallel
 
         def char
             if @running
-                'R'
+                @ascii ? 'R' : '😼'
             elsif @exit_status.nil?
-                'S'
+                @ascii ? 'S' : '😴'
             elsif has_succeeded?
-                'D'.green
+                (@ascii ? 'D' : '✓')
             else
-                'F'.red
+                (@ascii ? 'F' : '╳')
             end
         end
 

@@ -44,6 +44,7 @@ module Enparallel
                 #{'Options:'.bold}
                     -w, --workers <n>   Batch into a pool of <n> workers [default: #{workers_default}].
                     -p, --pick <type>   Task-picking rule (see "Types") [default: #{pick_default}].
+                    -a, --ascii         Use plain old ASCII characters to display task progress.
                     -v, --version       Version.
                     -h, --help          Help.
 
@@ -63,6 +64,10 @@ module Enparallel
 
         def workers
             @opts['--workers'].to_i || workers_default
+        end
+
+        def ascii
+            @opts['--ascii']
         end
 
         def pick

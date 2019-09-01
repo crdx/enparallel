@@ -6,19 +6,36 @@ Run many commands enparallel with a colourful overview.
 
  **enparallel** operates by reading lines from standard input, and executing a command once per entry, in parallel.
 
-The placeholder `{}`, if present, is replaced with each line in turn.
+The placeholder `{}`, if present, is replaced with each line of input in turn.
+
+```
+seq 1 10 | enparallel sleep {}
+```
+
+To run a more complex command or to make use of shell functions or constructs
+(enparallel runs its argument as a program) use a call to `bash -c`. Note that
+because of the `-c` you need to prefix the command with `--` to indicate the
+end of parameters to enparallel.
+
+```
+seq 1 10 | enparallel -- bash -c "sleep {} && echo Slept for {}"
+```
 
 ```
 Usage:
-    enparallel [options] <command>
+    enparallel [options] [--] <command>...
+
+Description:
+    enparallel operates by reading lines from standard input, and executing
+    <command> once per entry, in parallel.
 
 Options:
-    -w, --workers N     Batch into a pool of N workers [default: #].
-    -p, --pick RULE     Task-picking rule (see "Rules") [default: sequential].
+    -w, --workers <n>   Batch into a pool of <n> workers [default: #].
+    -p, --pick <type>   Task-picking rule (see "Types") [default: sequential].
     -v, --version       Version.
     -h, --help          Help.
 
-Rules:
+Types:
     sequential          The order in which the tasks were queued.
     random              Random order.
 ```

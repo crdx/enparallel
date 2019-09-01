@@ -24,13 +24,22 @@ module Enparallel
         def self.usage
             <<~EOF
                 #{'Usage:'.bold}
-                    #{basename} [options] <command>...
+                    #{basename} [options] [--] <command>...
 
                 #{'Description:'.bold}
                     #{basename} operates by reading lines from standard input, and executing
                     <command> once per entry, in parallel.
 
-                    The placeholder "{}", if present, is replaced with each line in turn.
+                    The placeholder "{}", if present, is replaced with each line of input in turn.
+
+                    seq 1 10 | enparallel sleep {}
+
+                    To run a more complex command or to make use of shell functions or constructs
+                    (enparallel runs its argument as a program) use a call to "bash -c". Note that
+                    because of the "-c" you need to prefix the command with "--" to indicate the
+                    end of parameters to enparallel.
+
+                    seq 1 10 | enparallel -- bash -c "sleep {} && echo Slept for {}"
 
                 #{'Options:'.bold}
                     -w, --workers <n>   Batch into a pool of <n> workers [default: #{workers_default}].
@@ -40,7 +49,7 @@ module Enparallel
 
                 #{'Types:'.bold}
                     sequential          The order in which the tasks were queued.
-                    random              Any order.
+                    random              Random order.
             EOF
         end
 

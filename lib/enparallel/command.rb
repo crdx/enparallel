@@ -10,8 +10,12 @@ module Enparallel
             Command.new(name, args)
         end
 
-        def interpolate(replacement)
+        def interpolate_safe(replacement)
             [@name, *replace(replacement)].shelljoin
+        end
+
+        def interpolate_unsafe(replacement)
+            [@name, *replace(replacement)].join(' ')
         end
 
         private

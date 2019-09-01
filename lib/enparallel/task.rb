@@ -16,7 +16,7 @@ module Enparallel
         def to_s
             document = SOML::Document.new
 
-            document.add('CommandLine', command_line)
+            document.add('CommandLine', command_line_unsafe)
             document.add('ExitStatus', @exit_status)
             document.add('RanAt', @ran_at)
             document.add('StandardOutput', @stdout) unless @stdout.empty?
@@ -41,7 +41,7 @@ module Enparallel
             @running = true
             @ran_at = Time.now
 
-            Open3.popen3(command_line) do |stdin, stdout, stderr, thread|
+            Open3.popen3(command_line_safe) do |stdin, stdout, stderr, thread|
                 @stdout = stdout.read.chomp
                 @stderr = stderr.read.chomp
                 @exit_status = thread.value.exitstatus
@@ -60,8 +60,12 @@ module Enparallel
 
         private
 
-        def command_line
-            @command.interpolate(@input)
+        def command_line_safe
+            @command.interpolate_safe(@input)
+        end
+
+        def command_line_unsafe
+            @command.interpolate_unsafe(@input)
         end
     end
 end

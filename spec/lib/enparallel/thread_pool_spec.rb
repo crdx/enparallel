@@ -9,10 +9,6 @@ describe ThreadPool do
         end
     end
 
-    it 'does not pick more workers than there are CPUs' do
-        expect(get_pool_of(8).worker_count).to eq(Util.processor_count)
-    end
-
     [0, 1, 2, 3, 5, 8].each do |n|
         it 'renders complete tasks with a D' do
             pool = get_pool_of(n, :good_command)

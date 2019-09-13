@@ -23,7 +23,7 @@ end
 
 def get_pool_of(n, type = :good_command, *args)
     tasks = n.times.map { get_task(type, *args) }
-    ThreadPool.new(tasks, 4, :sequential)
+    ThreadPool.new(tasks, Util.processor_count, :sequential)
 end
 
 require_relative '../lib/enparallel'

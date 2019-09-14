@@ -8,13 +8,16 @@ jobs:
     steps:
     - uses: actions/checkout@v1
 
-    - name: Set up
+    - name: Set up ruby
       uses: actions/setup-ruby@v1
       with:
         ruby-version: 2.6.x
 
-    - name: Run tests
+    - name: Set up environment
       run: |
         gem install bundler
-        bundle install --jobs 4 --retry 3
-        bundle exec rspec --require spec_helper
+        bundle install
+
+    - name: Run tests
+      run: |
+        bundle exec rspec

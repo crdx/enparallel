@@ -1,10 +1,10 @@
 #!/usr/bin/env ruby
-
 require_relative '../lib/enparallel'
 include Enparallel
 
 class Main
-    def self.run(cli)
+    def self.run
+        cli = CLI.parse(ARGV, STDIN)
         tasks = cli.inputs.map { |input| Task.new(cli.command, input) }
         pool = ThreadPool.new(tasks, cli.workers, cli.pick)
         new(pool).run
@@ -89,8 +89,8 @@ class Main
 end
 
 begin
-    Main.run(CLI.parse(ARGV, STDIN))
+    Main.run
 rescue Docopt::Exit => e
     puts e.message
-    exit
+    exit 1
 end

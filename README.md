@@ -35,11 +35,11 @@ seq 1 10 | enparallel -- bash -c "sleep {} && echo Slept for {}"
 
 With `--pick sequential`, tasks are picked from the list in order.
 
-![](examples/sequential.gif)
+![](casts/sequential.gif)
 
 With `--pick random`, tasks are picked from the list in a random order.
 
-![](examples/random.gif)
+![](casts/random.gif)
 
 ## Command line interface
 

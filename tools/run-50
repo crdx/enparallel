@@ -1,2 +1,0 @@
-#!/bin/bash
-seq 50 | ./tools/run --workers 32 --pick random -- tools/unpredictable-task "$@"

@@ -1,7 +1,7 @@
 BIN := 'bundle exec ruby -Ilib bin/enparallel'
 
 _help:
-    just --list
+    @just --list
 
 # build gem
 build:

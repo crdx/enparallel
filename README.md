@@ -52,7 +52,7 @@ Description:
     <command> once per entry, in parallel.
 
 Options:
-    -w, --workers <n>   Batch into a pool of <n> workers [default: #].
+    -w, --workers <n>   Batch into a pool of <n> workers [default: N¹].
     -p, --pick <type>   Task-picking rule (see "Types") [default: sequential].
     -v, --version       Version.
     -h, --help          Help.
@@ -62,7 +62,7 @@ Types:
     random              Random order.
 ```
 
-The default value for `--workers` is what Ruby determines to be the number of CPUs on the current system. The value displayed in the help text is the value that will be used.
+¹ The default value for `--workers` is what Ruby determines to be the number of CPUs on the current system. The value displayed in the help text is the value that will be used.
 
 ## Tests
 

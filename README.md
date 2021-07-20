@@ -72,9 +72,9 @@ Code coverage is output to `coverage/`, and stands at 100% for library code.
 
 ## Development
 
-Use `tools/install` to build and install locally for testing.
+Use `just install` to build and install locally for testing.
 
-Use `tools/publish` to release to rubygems.org
+Use `just publish` to release to rubygems.org.
 
 ## Log output
 

@@ -2,7 +2,7 @@ require_relative 'lib/enparallel/version'
 
 Gem::Specification.new do |spec|
     spec.homepage = 'https://github.com/crdx/enparallel'
-    spec.summary  = 'Run many commands enparallel with a colourful overview'
+    spec.summary  = 'Parallel command runner with a colourful overview'
     spec.name     = 'enparallel-bin'
     spec.version  = Enparallel::VERSION
     spec.author   = 'crdx'

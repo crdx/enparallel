@@ -84,7 +84,7 @@ See [SOML](https://github.com/crdx/soml) for more details.
 
 ## Bugs or contributions
 
-Open an [issue](http://github.com/crdx/enparallel/issues) or send a [pull request](http://github.com/crdx/enparallel/pulls).
+Open an [issue](https://github.com/crdx/enparallel/issues) or send a [pull request](https://github.com/crdx/enparallel/pulls).
 
 ## Licence
 

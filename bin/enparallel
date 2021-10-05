@@ -92,5 +92,5 @@ begin
     Main.run
 rescue Docopt::Exit => e
     puts CLI.usage
-    exit 1
+    exit 2
 end

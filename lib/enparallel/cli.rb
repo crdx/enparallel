@@ -14,7 +14,14 @@ module Enparallel
         end
 
         def self.parse(argv, stdin)
-            new(Docopt::docopt(usage, argv: argv, version: VERSION), stdin)
+            opts = Docopt::docopt(usage, argv: argv)
+
+            if opts['--version']
+                puts VERSION
+                exit
+            end
+
+            new(opts, stdin)
         end
 
         def self.basename
@@ -23,10 +30,11 @@ module Enparallel
 
         def self.usage
             <<~EOF
-                #{'Usage:'.bold}
+                Usage:
                     #{basename} [options] [--] <command>...
+                    #{basename} ( --version | --help )
 
-                #{'Description:'.bold}
+                Description:
                     #{basename} operates by reading lines from standard input, and executing
                     <command> once per entry, in parallel.
 
@@ -41,13 +49,13 @@ module Enparallel
 
                     seq 1 10 | enparallel -- bash -c "sleep {} && echo Slept for {}"
 
-                #{'Options:'.bold}
+                Options:
                     -w, --workers <n>   Batch into a pool of <n> workers [default: #{workers_default}].
                     -p, --pick <type>   Task-picking rule (see "Types") [default: #{pick_default}].
                     -v, --version       Version.
                     -h, --help          Help.
 
-                #{'Types:'.bold}
+                Types:
                     sequential          The order in which the tasks were queued.
                     random              Random order.
             EOF

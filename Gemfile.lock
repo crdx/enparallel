@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    enparallel-bin (1.0.7)
+    enparallel-bin (1.0.8)
       colorize (~> 0.8.1)
       docopt (~> 0.6.1)
       require_all (~> 3.0)
@@ -47,4 +47,4 @@ DEPENDENCIES
   simplecov (~> 0.21.0)
 
 BUNDLED WITH
-   2.2.21
+   2.2.26

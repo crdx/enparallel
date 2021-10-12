@@ -2,10 +2,10 @@
 
 delay = rand(5)
 puts 'Sleep %d secs' % delay
-sleep delay
+sleep(delay)
 
 if rand(2) == 0
-    STDERR.puts 'Fail'
+    $stderr.puts 'Fail'
     exit 1
 else
     puts 'Success'

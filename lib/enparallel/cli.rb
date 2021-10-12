@@ -14,7 +14,7 @@ module Enparallel
         end
 
         def self.parse(argv, stdin)
-            opts = Docopt::docopt(usage, argv: argv)
+            opts = Docopt.docopt(usage, argv: argv)
 
             if opts['--version']
                 puts VERSION

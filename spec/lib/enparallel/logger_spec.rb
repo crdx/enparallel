@@ -38,6 +38,6 @@ describe Logger do
         expect(File).to receive(:write).with(path, task + "\n").and_return(100)
 
         log_group = LogGroup.new(:success, [task])
-        expect(log_group.write(path)).to eq([path, '100B'])
+        expect(log_group.write(path)).to eq('100B')
     end
 end

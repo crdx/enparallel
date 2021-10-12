@@ -36,3 +36,7 @@ build-readme:
 # run 50 unpredictable tasks
 run-50:
     seq 50 | {{ BIN }} --workers 32 --pick random -- tools/unpredictable-task
+
+# run linter
+lint:
+    rubocop

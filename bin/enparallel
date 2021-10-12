@@ -4,7 +4,7 @@ include Enparallel
 
 class Main
     def self.run
-        cli = CLI.parse(ARGV, STDIN)
+        cli = CLI.parse(ARGV, $stdin)
         tasks = cli.inputs.map { |input| Task.new(cli.command, input) }
         pool = ThreadPool.new(tasks, cli.workers, cli.pick)
         new(pool).run
@@ -35,7 +35,7 @@ class Main
 
     def finish
         puts
-        puts "Tasks complete"
+        puts 'Tasks complete'
         puts
         puts "#{@pool.succeeded_tasks.length.to_s.green.bold} tasks succeeded"
         puts "#{@pool.failed_tasks.length.to_s.red.bold} tasks failed"
@@ -52,7 +52,7 @@ class Main
 
     def render
         print "\r" + @pool.render
-        sleep 0.1
+        sleep(0.1)
     end
 
     def all_paths_available(paths)
@@ -83,14 +83,14 @@ class Main
         log_groups.each do |log_group|
             type = log_group.type
             path = paths[type]
-            puts 'Written %s log: %s (%s)' % [type, *log_group.write(path)]
+            puts 'Written %s log: %s (%s)' % [type, path, log_group.write(path)]
         end
     end
 end
 
 begin
     Main.run
-rescue Docopt::Exit => e
+rescue Docopt::Exit
     puts CLI.usage
     exit 2
 end

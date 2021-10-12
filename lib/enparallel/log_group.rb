@@ -1,6 +1,7 @@
 module Enparallel
     class LogGroup
-        attr_reader :type, :tasks
+        attr_reader :type
+        attr_reader :tasks
 
         def initialize(type, tasks)
             @type = type
@@ -11,13 +12,13 @@ module Enparallel
             tasks.join("\n\n") + "\n"
         end
 
-        def has_tasks?
+        def tasks?
             tasks.length > 0
         end
 
         def write(path)
             size = File.write(path, to_soml)
-            [path, Util.bytes_to_human(size)]
+            Util.bytes_to_human(size)
         end
 
         def self.of(type, pool)

@@ -13,7 +13,7 @@ module Enparallel
         end
 
         def get_log_groups
-            get_all_log_groups.select(&:has_tasks?)
+            get_all_log_groups.select(&:tasks?)
         end
     end
 end

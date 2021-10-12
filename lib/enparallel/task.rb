@@ -30,7 +30,7 @@ module Enparallel
                 'R'
             elsif @exit_status.nil?
                 'S'
-            elsif has_succeeded?
+            elsif succeeded?
                 'D'.green
             else
                 'F'.red
@@ -41,7 +41,7 @@ module Enparallel
             @running = true
             @ran_at = Time.now
 
-            Open3.popen3(command_line_safe) do |stdin, stdout, stderr, thread|
+            Open3.popen3(command_line_safe) do |_stdin, stdout, stderr, thread|
                 @stdout = stdout.read.chomp
                 @stderr = stderr.read.chomp
                 @exit_status = thread.value.exitstatus
@@ -53,8 +53,9 @@ module Enparallel
             @running = false
         end
 
-        def has_succeeded?
+        def succeeded?
             raise 'Task not resolved' if @ran_at.nil?
+
             @exit_status == 0
         end
 

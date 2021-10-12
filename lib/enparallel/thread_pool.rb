@@ -16,7 +16,7 @@ module Enparallel
         def drain
             @workers = @worker_count.times.map do
                 Thread.new do
-                    while task = @picker.next
+                    while (task = @picker.next)
                         task.run
                     end
                 end
@@ -32,17 +32,18 @@ module Enparallel
         end
 
         def succeeded_tasks
-            @tasks.select(&:has_succeeded?)
+            @tasks.select(&:succeeded?)
         end
 
         def failed_tasks
-            @tasks.reject(&:has_succeeded?)
+            @tasks.reject(&:succeeded?)
         end
 
         def tasks_of(type)
-            if type == :success
+            case type
+            when :success
                 succeeded_tasks
-            elsif type == :failure
+            when :failure
                 failed_tasks
             end
         end

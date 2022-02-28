@@ -24,18 +24,18 @@ module Enparallel
             new(opts, stdin)
         end
 
-        def self.basename
-            File.basename($0)
+        def self.program_name
+            File.basename($PROGRAM_NAME)
         end
 
         def self.usage
             <<~EOF
                 Usage:
-                    #{basename} [options] [--] <command>...
-                    #{basename} ( --version | --help )
+                    #{program_name} [options] [--] <command>...
+                    #{program_name} ( --version | --help )
 
                 Description:
-                    #{basename} operates by reading lines from standard input, and executing
+                    #{program_name} operates by reading lines from standard input, and executing
                     <command> once per entry, in parallel.
 
                     The placeholder "{}", if present, is replaced with each line of input in turn.

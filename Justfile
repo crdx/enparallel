@@ -40,3 +40,7 @@ run-50:
 # run linter
 lint:
     rubocop
+
+# fix lint errors
+fix:
+    rubocop -a

@@ -82,7 +82,7 @@ Task logs are written out in SOML.
 
 See [SOML](https://github.com/crdx/soml) for more details.
 
-## Bugs or contributions
+## Contributions
 
 Open an [issue](https://github.com/crdx/enparallel/issues) or send a [pull request](https://github.com/crdx/enparallel/pulls).
 

@@ -1,6 +1,6 @@
 # enparallel
 
-Run many commands enparallel with a colourful overview.
+Run many commands **enparallel** with a colourful overview.
 
 ## Installation
 

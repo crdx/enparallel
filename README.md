@@ -41,7 +41,7 @@ With `--pick random`, tasks are picked from the list in a random order.
 
 ![](casts/random.gif)
 
-## Command line interface
+## CLI
 
 ```
 Usage:

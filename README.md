@@ -88,4 +88,4 @@ Open an [issue](https://github.com/crdx/enparallel/issues) or send a [pull reque
 
 ## Licence
 
-[MIT](LICENCE.md).
+[GPLv3](LICENCE).

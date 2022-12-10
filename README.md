@@ -68,13 +68,11 @@ Types:
 
 Run tests with `tools/test`.
 
-Code coverage is output to `coverage/`, and stands at 100% for library code.
+Code coverage is output to `coverage/`.
 
 ## Development
 
 Use `just install` to build and install locally for testing.
-
-Use `just publish` to release to rubygems.org.
 
 ## Log output
 

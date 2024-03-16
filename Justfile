@@ -8,40 +8,39 @@ import? 'internal.just'
 help:
     just --list --unsorted
 
-# build gem
-build:
-    bundle exec rake build
+init:
+    bundle install
 
-# remove built gems
-clean:
-    rm -vf pkg/*
-
-# build and install the gem globally to the system
-install:
-    bundle exec rake install
-
-# run the gem's binary
 run +args:
     {{ BIN }} {{ args }}
 
-# run tests
+fmt:
+    just --fmt
+
+lint:
+    rubocop
+
+fix:
+    rubocop -A
+
 test:
     bundle exec rspec
     echo
     echo o coverage/index.html
 
-# build the asciicasts of enparallel in action
+build:
+    bundle exec rake build
+
+install:
+    bundle exec rake install
+
+clean:
+    rm -vf pkg/*
+
+# build the asciicasts
 build-readme:
     tools/build-readme
 
 # run 50 unpredictable tasks
 run-50:
     seq 50 | {{ BIN }} --workers 32 --pick random -- tools/unpredictable-task
-
-# run linter
-lint:
-    rubocop
-
-# fix lint errors
-fix:
-    rubocop -a

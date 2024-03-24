@@ -32,7 +32,7 @@ module Enparallel
             <<~EOF
                 Usage:
                     #{program_name} [options] [--] <command>...
-                    #{program_name} ( --version | --help )
+                    #{program_name} --version
 
                 Description:
                     #{program_name} operates by reading lines from standard input, and executing
@@ -50,14 +50,13 @@ module Enparallel
                     seq 1 10 | enparallel -- bash -c "sleep {} && echo Slept for {}"
 
                 Options:
-                    -w, --workers <n>   Batch into a pool of <n> workers [default: #{workers_default}].
-                    -p, --pick <type>   Task-picking rule (see "Types") [default: #{pick_default}].
-                    -v, --version       Version.
-                    -h, --help          Help.
+                    -w, --workers <n>   Batch into a pool of <n> workers [default: #{workers_default}]
+                    -p, --pick <type>   Task-picking rule (see "Types") [default: #{pick_default}]
+                    -v, --version       Show version
 
                 Types:
-                    sequential          The order in which the tasks were queued.
-                    random              Random order.
+                    sequential          The order in which the tasks were queued
+                    random              Random order
             EOF
         end
 

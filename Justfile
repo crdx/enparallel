@@ -39,8 +39,8 @@ clean:
 
 # build the asciicasts
 build-readme:
-    tools/build-readme
+    internal/build-readme
 
 # run 50 unpredictable tasks
 run-50:
-    seq 50 | {{ BIN }} --workers 32 --pick random -- tools/unpredictable-task
+    seq 50 | {{ BIN }} --workers 32 --pick random -- internal/unpredictable-task

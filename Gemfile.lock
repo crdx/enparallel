@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    enparallel-bin (1.1.0)
+    enparallel-bin (1.1.1)
       colorize (~> 0.8.1)
       docopt (~> 0.6.1)
       json (~> 2.7)

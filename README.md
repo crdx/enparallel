@@ -65,7 +65,7 @@ Types:
 
 ## Tests
 
-Run tests with `tools/test`.
+Run tests with `just test`.
 
 Code coverage is output to `coverage/`.
 

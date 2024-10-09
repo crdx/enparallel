@@ -21,7 +21,7 @@ module Enparallel
         private
 
         def replace(replacement)
-            @args.map { |arg| arg.gsub('{}', replacement) }
+            @args.map { _1.gsub('{}', replacement) }
         end
     end
 end

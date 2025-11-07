@@ -69,7 +69,7 @@ module Enparallel
         end
 
         def workers
-            @opts['--workers'].to_i || workers_default
+            @opts['--workers'].to_i
         end
 
         def pick

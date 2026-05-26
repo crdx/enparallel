@@ -46,6 +46,7 @@ With `--pick random`, tasks are picked from the list in a random order.
 ```
 Usage:
     enparallel [options] [--] <command>...
+    enparallel --version
 
 Description:
     enparallel operates by reading lines from standard input, and executing
